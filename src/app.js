@@ -40,7 +40,17 @@ app.use('/api/orders',       ordersRoutes);
 app.use('/api/interactions', interactionsRoutes);
 app.use('/api/dashboard',    dashboardRoutes);
 
-app.use(notFound);
+// Додаємо роздачу статики фронтенду для деплою
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+app.get('*', (req, res) => {
+  if (req.originalUrl.startsWith('/api')) {
+    return notFound(req, res);
+  }
+  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+});
+
 app.use(errorHandler);
 
 module.exports = app;
