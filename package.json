@@ -12,6 +12,9 @@
     "test:coverage": "jest --coverage"
   },
   "private": true,
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "better-sqlite3": "^11.10.0",
