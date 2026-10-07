@@ -57,9 +57,11 @@ export default function OrderDetails() {
       await fetchApi('/interactions', {
         method: 'POST',
         body: JSON.stringify({
+          client_id: order.client_id,
           order_id: id,
           type: interactionType,
-          notes: interactionNotes
+          subject: interactionNotes.slice(0, 80),
+          description: interactionNotes
         })
       });
       toast.success('Interaction added');
@@ -218,10 +220,10 @@ export default function OrderDetails() {
                             <span className="text-xs uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-semibold">{int.type}</span>
                           </div>
                           <span className="text-xs text-slate-500">
-                            {new Date(int.created_at).toLocaleString()}
+                            {new Date(int.occurred_at || int.created_at).toLocaleString()}
                           </span>
                         </div>
-                        <p className="text-slate-300 text-sm whitespace-pre-wrap">{int.notes}</p>
+                        <p className="text-slate-300 text-sm whitespace-pre-wrap">{int.description || int.subject}</p>
                       </div>
                     </div>
                   ))
