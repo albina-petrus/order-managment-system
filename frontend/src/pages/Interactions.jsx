@@ -89,7 +89,7 @@ export default function Interactions() {
                       </div>
                       
                       <div className="text-slate-300 text-sm whitespace-pre-wrap mb-3">
-                        {int.notes}
+                        {int.description || int.subject}
                       </div>
                       
                       <div className="flex items-center justify-between pt-3 border-t border-slate-800/50 text-xs">
